@@ -8,7 +8,7 @@ proto:
 		proto/chat.proto
 
 dev:
-	cd ../ && go get -u github.com/cosmtrek/air && cd grpc-chat
+	GO111MODULE=off go get -u github.com/cosmtrek/air
 	air -c server/air.toml
 
 test:
