@@ -1,0 +1,13 @@
+root = "./server"
+tmp_dir = ".tmp"
+
+[build]
+cmd = "go build -o ./server/.tmp/server ./server"
+bin = "./server/.tmp/server"
+exclude_unchanged = true
+delay = 1000
+send_interrupt = false
+kill_delay = 500
+
+[misc]
+clean_on_exit = true

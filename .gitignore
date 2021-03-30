@@ -1,0 +1,7 @@
+proto/*
+!proto/chat.proto
+!proto/Dockerfile
+
+vendor
+
+.tmp

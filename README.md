@@ -1,2 +1,1 @@
 # grpc-chat
-Grpc Chat

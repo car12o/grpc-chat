@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option go_package = "github.com/car12o/grpc-chat/proto";
+
+package chat;
+
+service Chat {
+  rpc RegisterUser (User) returns (Token) {}
+  rpc ListenBroadcast (Empty) returns (stream Message) {}
+  rpc PostMessage (Message) returns (Empty) {}
+}
+
+message Empty {}
+
+message User {
+  string name = 1;
+}
+
+message Token {
+  User user = 1;
+  string hash = 2;
+}
+
+message Message {
+  User user = 1;
+  string msg = 2;
+}
