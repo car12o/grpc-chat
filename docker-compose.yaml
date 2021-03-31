@@ -1,0 +1,46 @@
+version: "3.3"
+
+services:
+  proto:
+    image: grpc-chat-proto
+    build:
+      context: .
+      dockerfile: ./proto/Dockerfile
+    command: make proto
+    restart: "no"
+    volumes:
+      - ./proto:/grpc-chat/proto
+      - ./Makefile:/grpc-chat/Makefile
+
+  envoy:
+    image: envoyproxy/envoy:v1.17.1
+    command: envoy -c envoy/config.yaml
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "3000:3000"
+      - "9000:9000"
+    volumes:
+      - ./envoy:/envoy
+
+  server:
+    image: golang:1.16-stretch
+    working_dir: /go/src/github.com/car12o/grpc-chat
+    command: make sv.dev
+    restart: unless-stopped
+    depends_on:
+      - proto
+    volumes:
+      - .:/go/src/github.com/car12o/grpc-chat
+
+  client:
+    image: node:14.16.0-stretch
+    working_dir: /usr/src/app
+    command: make cl.dev
+    restart: unless-stopped
+    depends_on:
+      - proto
+    volumes:
+      - ./client:/usr/src/app/client
+      - ./Makefile:/usr/src/app/Makefile
+

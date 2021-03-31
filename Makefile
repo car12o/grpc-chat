@@ -7,9 +7,12 @@ proto:
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:. \
 		proto/chat.proto
 
-dev:
+sv.dev:
 	GO111MODULE=off go get -u github.com/cosmtrek/air
 	air -c server/air.toml
 
-test:
+sv.test:
 	go test -v ./server/...
+
+cl.dev:
+	npm run start --prefix ./client
