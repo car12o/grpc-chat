@@ -6,7 +6,6 @@ services:
     build:
       context: .
       dockerfile: ./proto/Dockerfile
-    command: make proto
     restart: "no"
     volumes:
       - ./proto:/grpc-chat/proto
@@ -42,5 +41,5 @@ services:
       - proto
     volumes:
       - ./client:/usr/src/app/client
+      - ./proto:/usr/src/app/proto
       - ./Makefile:/usr/src/app/Makefile
-
