@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-option go_package = "github.com/car12o/grpc-chat/proto";
-
 package chat;
+
+option go_package = "github.com/car12o/grpc-chat/proto";
 
 service Chat {
   rpc RegisterUser (User) returns (Token) {}
